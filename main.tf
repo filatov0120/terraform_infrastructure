@@ -45,6 +45,7 @@ module "docker_server" {
   instance_profile  = null
   security_group_id = module.vpc-terraform.security_group_id
   public_subnet_id  = module.vpc-terraform.public_subnet_id
+  ssh_key           = "blaize-test"
 
   instance_tags = {
     Name        = "${var.proj_name}_${var.env}_server"
@@ -65,6 +66,7 @@ module "mongodb_server" {
   instance_profile  = null
   security_group_id = module.vpc-terraform.security_group_id
   public_subnet_id  = module.vpc-terraform.public_subnet_id
+  ssh_key           = "blaize-test"
 
   instance_tags = {
     Name        = "MongoDB_${var.env}_server"
@@ -85,6 +87,7 @@ module "redis_server" {
   instance_profile  = null
   security_group_id = module.vpc-terraform.security_group_id
   public_subnet_id  = module.vpc-terraform.public_subnet_id
+  ssh_key           = "blaize-test"
 
   instance_tags = {
     Name        = "Redis_${var.env}_server"
