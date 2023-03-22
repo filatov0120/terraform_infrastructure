@@ -58,7 +58,7 @@ module "mongodb_server" {
   source            = "git@github.com:filatov0120/terraform_modules.git//aws_instance"
   depends_on        = [module.vpc-terraform]
   instance_name     = "MongoDB_${var.env}_server"
-  ami               = data.aws_ami.amazone_linux.id
+  ami               = data.aws_ami.ubuntu_server.id
   azs               = var.azs
   instance_type     = "t2.micro"
   root_block_size   = 10
