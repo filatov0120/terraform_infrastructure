@@ -1,4 +1,11 @@
 terraform {
+
+  backend "s3" {
+    bucket = "blaze-devops-terraform-state-0120" #manual create
+    key    = "dev/infrastructure/terraform.tfstate"
+    region = "us-east-1"
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -30,6 +37,7 @@ module "docker_server" {
   source            = "./modules/aws_instance"
   depends_on        = [module.vpc-terraform]
   instance_name     = "Docker_server_${var.env}_server"
+  ami               = data.aws_ami.ubuntu_server.id
   azs               = var.azs
   instance_type     = "t2.micro"
   root_block_size   = 10
@@ -49,6 +57,7 @@ module "mongodb_server" {
   source            = "./modules/aws_instance"
   depends_on        = [module.vpc-terraform]
   instance_name     = "MongoDB_${var.env}_server"
+  ami               = data.aws_ami.amazone_linux.id
   azs               = var.azs
   instance_type     = "t2.micro"
   root_block_size   = 10
@@ -68,6 +77,7 @@ module "redis_server" {
   source            = "./modules/aws_instance"
   depends_on        = [module.vpc-terraform]
   instance_name     = "Redis_${var.env}_server"
+  ami               = data.aws_ami.ubuntu_server.id
   azs               = var.azs
   instance_type     = "t2.micro"
   root_block_size   = 10
