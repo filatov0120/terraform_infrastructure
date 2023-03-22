@@ -20,21 +20,21 @@ provider "aws" {
 }
 
 module "vpc-terraform" {
-  source              = "./modules/aws_vpc"
+  source              = "git@github.com:filatov0120/terraform_modules.git//aws_vpc"
   azs                 = var.azs
   env                 = var.env
   cidr_vpc            = var.cidr_vpc
   public_subnet_cidr  = var.public_subnet_cidr
   private_subnet_cidr = var.private_subnet_cidr
   proj_name           = var.proj_name
-  common_tags = {
+  vpc_tags = {
     Project     = var.proj_name,
     Environment = var.env
   }
 }
 
 module "docker_server" {
-  source            = "./modules/aws_instance"
+  source            = "git@github.com:filatov0120/terraform_modules.git//aws_instance"
   depends_on        = [module.vpc-terraform]
   instance_name     = "Docker_server_${var.env}_server"
   ami               = data.aws_ami.ubuntu_server.id
@@ -46,7 +46,7 @@ module "docker_server" {
   security_group_id = module.vpc-terraform.security_group_id
   public_subnet_id  = module.vpc-terraform.public_subnet_id
 
-  common_tags = {
+  instance_tags = {
     Name        = "${var.proj_name}_${var.env}_server"
     Project     = var.proj_name,
     Environment = var.env
@@ -54,7 +54,7 @@ module "docker_server" {
 }
 
 module "mongodb_server" {
-  source            = "./modules/aws_instance"
+  source            = "git@github.com:filatov0120/terraform_modules.git//aws_instance"
   depends_on        = [module.vpc-terraform]
   instance_name     = "MongoDB_${var.env}_server"
   ami               = data.aws_ami.amazone_linux.id
@@ -66,7 +66,7 @@ module "mongodb_server" {
   security_group_id = module.vpc-terraform.security_group_id
   public_subnet_id  = module.vpc-terraform.public_subnet_id
 
-  common_tags = {
+  instance_tags = {
     Name        = "MongoDB_${var.env}_server"
     Project     = var.proj_name,
     Environment = var.env
@@ -74,7 +74,7 @@ module "mongodb_server" {
 }
 
 module "redis_server" {
-  source            = "./modules/aws_instance"
+  source            = "git@github.com:filatov0120/terraform_modules.git//aws_instance"
   depends_on        = [module.vpc-terraform]
   instance_name     = "Redis_${var.env}_server"
   ami               = data.aws_ami.ubuntu_server.id
@@ -86,7 +86,7 @@ module "redis_server" {
   security_group_id = module.vpc-terraform.security_group_id
   public_subnet_id  = module.vpc-terraform.public_subnet_id
 
-  common_tags = {
+  instance_tags = {
     Name        = "Redis_${var.env}_server"
     Project     = var.proj_name,
     Environment = var.env
