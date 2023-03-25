@@ -1,17 +1,21 @@
 output "vpc_id" {
-  value = module.vpc-terraform.vpc_id
+  description = "VPC id"
+  value       = module.vpc-terraform.vpc_id
 }
 
 output "vpc_cidr" {
-  value = module.vpc-terraform.vpc_cidr
+  description = "VPC CIDR"
+  value       = module.vpc-terraform.vpc_cidr
 }
 
-output "public_subnet_id" {
-  value = module.vpc-terraform.public_subnet_id
-}
+# output "public_subnet_id" {
+#   description = "Public subnet ID"
+#   value       = module.vpc-terraform.public_subnet_id
+# }
 
 output "private_subnet_id" {
-  value = module.vpc-terraform.private_subnet_id
+  description = "Private subnet ID"
+  value       = module.vpc-terraform.private_subnet_id
 }
 
 output "instance_id" {
@@ -19,32 +23,32 @@ output "instance_id" {
   value       = module.docker_server.instance_id
 }
 
-output "public_ip_docker" {
-  description = "Public IP address of EC2 instance"
-  value       = module.docker_server.instance_public_ip
+output "EIP_docker_server" {
+  description = "EIP for docker_server"
+  value       = module.docker_server.elastic_ip
 }
 
-output "public_url_docker" {
-  description = "Public URL address of EC2 instance"
-  value       = module.docker_server.instance_public_url
+output "EIP_mongodb_server" {
+  description = "EIP for mongodb_server"
+  value       = module.mongodb_server.elastic_ip
 }
 
-output "public_ip_mongodb" {
-  description = "Public IP address of EC2 instance"
-  value       = module.mongodb_server.instance_public_ip
+output "EIP_redis_server" {
+  description = "EIP for redis_server"
+  value       = module.redis_server.elastic_ip
 }
 
-output "public_url_mongodb" {
-  description = "Public URL address of EC2 instance"
-  value       = module.mongodb_server.instance_public_url
+output "DNS_docker_server" {
+  description = "EIP for docker_server"
+  value       = module.docker_server.instance_public_url_eip
 }
 
-output "public_ip_redis" {
-  description = "Public IP address of EC2 instance"
-  value       = module.mongodb_server.instance_public_ip
+output "DNS_mongodb_server" {
+  description = "EIP for mongodb_server"
+  value       = module.mongodb_server.instance_public_url_eip
 }
 
-output "public_url_redis" {
-  description = "Public URL address of EC2 instance"
-  value       = module.mongodb_server.instance_public_url
+output "DNS_redis_server" {
+  description = "EIP for redis_server"
+  value       = module.redis_server.instance_public_url_eip
 }
