@@ -20,11 +20,11 @@ provider "aws" {
 }
 
 module "vpc-terraform" {
-  source   = "git@github.com:filatov0120/terraform_modules.git//aws_vpc"
-  azs      = var.azs
-  env      = var.env
-  cidr_vpc = var.cidr_vpc
-  # public_subnet_cidr  = var.public_subnet_cidr
+  source              = "git@github.com:filatov0120/terraform_modules.git//aws_vpc"
+  azs                 = var.azs
+  env                 = var.env
+  cidr_vpc            = var.cidr_vpc
+  public_subnet_cidr  = var.public_subnet_cidr
   private_subnet_cidr = var.private_subnet_cidr
   proj_name           = var.proj_name
   vpc_tags = {
@@ -44,7 +44,7 @@ module "docker_server" {
   root_volume_type  = "gp2"
   instance_profile  = null
   security_group_id = module.vpc-terraform.security_group_id
-  subnet_id         = module.vpc-terraform.private_subnet_id
+  subnet_id         = module.vpc-terraform.public_subnet_id
   ssh_key           = "blaize-test"
 
   instance_tags = {
@@ -65,7 +65,7 @@ module "mongodb_server" {
   root_volume_type  = "gp2"
   instance_profile  = null
   security_group_id = module.vpc-terraform.security_group_id
-  subnet_id         = module.vpc-terraform.private_subnet_id
+  subnet_id         = module.vpc-terraform.public_subnet_id
   ssh_key           = "blaize-test"
 
   instance_tags = {
@@ -86,7 +86,7 @@ module "redis_server" {
   root_volume_type  = "gp2"
   instance_profile  = null
   security_group_id = module.vpc-terraform.security_group_id
-  subnet_id         = module.vpc-terraform.private_subnet_id
+  subnet_id         = module.vpc-terraform.public_subnet_id
   ssh_key           = "blaize-test"
 
   instance_tags = {

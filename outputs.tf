@@ -8,10 +8,10 @@ output "vpc_cidr" {
   value       = module.vpc-terraform.vpc_cidr
 }
 
-# output "public_subnet_id" {
-#   description = "Public subnet ID"
-#   value       = module.vpc-terraform.public_subnet_id
-# }
+output "public_subnet_id" {
+  description = "Public subnet ID"
+  value       = module.vpc-terraform.public_subnet_id
+}
 
 output "private_subnet_id" {
   description = "Private subnet ID"

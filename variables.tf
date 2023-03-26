@@ -37,10 +37,10 @@ variable "cidr_vpc" {
   default     = "192.168.0.0/16"
 }
 
-# variable "public_subnet_cidr" {
-#   description = "Public subnet CIDR"
-#   default     = ""
-# }
+variable "public_subnet_cidr" {
+  description = "Public subnet CIDR"
+  default     = "192.168.11.0/24"
+}
 
 variable "private_subnet_cidr" {
   description = "Public subnet CIDR"
